@@ -1,0 +1,18 @@
+class MainWindow(tk.TK):
+  def __init__():
+        self.title("Drake the Snake")
+        self.create_widgets()
+        
+    def create_widgets(self):
+        
+        # text presenting the main rules (uploaded from the file rules.json)
+                
+        # radiobutton for game options
+        
+        # button that open a new window corresponding to the selection given by the radiobuttons
+  
+        # exit button which end the game
+
+if __name__ == "__main__":
+    app = MainWindow()
+    app.mainloop()
