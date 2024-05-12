@@ -33,4 +33,89 @@ NombreDeCases= 75
 LargeurCase = (LargeurPlateau / NombreDeCases)
 HauteurCase = (HauteurPlateau / NombreDeCases)
 
+def remplir_case (x, y):
+"""
+Function which determines the size of the squares on the board and which colors them in green to symbolize the snake
+We define the coordinates (origin_caseX1; origin_caseY1) of the point at the top left of the box and (origin_caseX2; origin_caseY2) of the point at the bottom right of the box
+"""
 
+def case_aleatoire():
+"""
+Function that returns a random case using the randint library
+"""
+
+def dessine_serpent(snake):
+"""
+Function that displays the Drake the snake in the form of cases
+Arg : List snake symbolising the length of the snake and the coordinates of his body
+"""
+
+def be_in_snake(case):
+"""
+Function that identifies if a case is in the snake or not
+Arg : a case of coordinates (x,y)
+"""
+
+def fruit_aleatoire():
+"""
+We return a random fruit that is not in the snake
+"""
+
+def dessine_fruit():
+"""
+We draw the fruit, the same as to color a box, but we use create_oval instead
+"""
+
+#These four functions allow the snake to move in four directions
+#they update the movement coordinates
+
+def left_key(event):
+    global MOUVEMENT
+    MOUVEMENT = (-1, 0)
+
+def right_key(event):
+    global MOUVEMENT
+    MOUVEMENT = (1, 0)
+
+def up_key(event):
+    global MOUVEMENT
+    MOUVEMENT = (0, -1)
+
+def down_key(event):
+    global MOUVEMENT
+    MOUVEMENT = (0, 1)
+
+fenetre.bind("<Left>", left_key)
+fenetre.bind("<Right>", right_key)
+fenetre.bind("<Up>", up_key)
+fenetre.bind("<Down>", down_key)
+
+def dead_snake(NouvelleTete):
+"""
+updates the LOST variable indicating if we lost
+"""
+
+def mise_a_jour_score():
+"""
+updates the score at each fruit eaten by the snake by adding +1
+"""
+
+def update_snake():
+"""
+Function that updates the height of the snake if he eats a fruit, also verifying that he the player did not lose,
+and adds a new head to the snake
+"""
+
+def reinitialiser_jeu():
+"""
+Function that resets variables for a new game
+"""
+
+SNAKE = [case_aleatoire()]
+FRUIT = fruit_aleatoire()
+MOUVEMENT = (0, 0)
+SCORE = 0
+PERDU = 0
+
+fenetre.after(0, tache())
+fenetre.mainloop()
