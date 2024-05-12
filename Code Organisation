@@ -36,7 +36,8 @@ HauteurCase = (HauteurPlateau / NombreDeCases)
 def remplir_case (x, y):
 """
 Function which determines the size of the squares on the board and which colors them in green to symbolize the snake
-We define the coordinates (origin_caseX1; origin_caseY1) of the point at the top left of the box and (origin_caseX2; origin_caseY2) of the point at the bottom right of the box
+We define the coordinates (origin_caseX1; origin_caseY1) of the point at the top left of 
+the box and (origin_caseX2; origin_caseY2) of the point at the bottom right of the box
 """
 
 def case_aleatoire():
