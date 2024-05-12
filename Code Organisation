@@ -1,1 +1,36 @@
+from tkinter import *
+from random import randint
+
+########################################################################################################################
+
+fenetre = Tk()
+fenetre.title('Drake The Snake')
+hauteur = fenetre.winfo_screenheight()
+largeur = fenetre.winfo_screenwidth()
+H = str(int(hauteur/1.1))
+L = str(int(largeur/2))
+fenetre.geometry(L + "x" + H + "+0+0")
+
+########################################################################################################################
+
+#We define the dimensions of the game set
+LargeurPlateau = largeur /2
+HauteurPlateau = hauteur /1.2
+
+Plateau = Canvas(fenetre, width = LargeurPlateau, height = HauteurPlateau, bg = "green")
+Plateau.pack(side="bottom")
+
+#CANVAS for the score
+Barre = Text(fenetre, width = int(largeur /2), height = int(HauteurPlateau / 10), bg = "light blue")
+#We place a bar in which the score will be displayed
+Barre.pack(side="top")
+Barre.insert(END, "score: 0\n")
+
+#We define the number of cases
+NombreDeCases= 75
+
+#We define the dimension of a case
+LargeurCase = (LargeurPlateau / NombreDeCases)
+HauteurCase = (HauteurPlateau / NombreDeCases)
+
 
