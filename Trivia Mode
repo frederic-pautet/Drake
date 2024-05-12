@@ -1,0 +1,44 @@
+class SnakeGame_Trivia:
+
+ def __init__(self, master):
+        self.master = master
+        self.master.title("Snake Trivia Game")
+        self.canvas = tk.Canvas(self.master, width=400, height=400)
+        self.canvas.pack()
+
+        self.score = 0
+        self.current_question = ""
+        self.correct_answer = ""
+        self.initialize_game()
+
+ def initialize_game(self):
+        self.generate_question()
+        self.display_question()
+
+def generate_question(self):
+"""
+Function that generates a question to be answered by the player from the JSON file named 'Trivia-mode'
+"""
+
+def display_question(self):
+"""
+Function that displays the different answers a,b,c or d on the panel as a case that the snake can go to like a fruit in the main game
+"""
+
+def check_answer(self, answer):
+"""
+Function that check if the chosen answer == the correct answer
+if chosen answer == correct answer:
+   score += 1
+   check_answer(self, x)
+else:
+   Game_over(self)
+"""
+
+def game_over(self):
+"""
+Function that reinitialises the panel for a new game if previous game lost and adds score to the 'SCORE' file
+"""
+
+if __name__ == "__main__":
+    main()
