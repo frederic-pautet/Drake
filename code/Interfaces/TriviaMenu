@@ -29,13 +29,13 @@ def main(precedent_window):
         messagebox.showinfo("Trivia Mode Rules", rules)
 
     # Label for speed setting
-    tk.Label(trivia_window, text="Set Question difficulty:").pack(pady=5)
+    tk.Label(trivia_window, text="Select Question difficulty:").pack(pady=5)
 
-    # Speed setting options
-    speed_var = tk.StringVar(value="Medium")
-    speeds = ["Slow", "Medium", "Fast"]
-    for speed in speeds:
-        tk.Radiobutton(trivia_window, text=speed, variable=speed_var, value=speed).pack(anchor='w')
+    # Questions setting options
+    difficulty_var = tk.StringVar(value="Medium")
+    difficulties = ["Easy", "Medium", "Hard"]
+    for difficulty in difficulties:
+        tk.Radiobutton(trivia_window, text=difficulty, variable=difficulty_var, value=difficulty).pack(anchor='w')
 
     # Button to show rules
     tk.Button(trivia_window, text="Show Rules", command=show_rules).pack(pady=5)
@@ -51,8 +51,8 @@ def main(precedent_window):
 
     # Function to start the game with selected speed
     def start_classic_game():
-        selected_speed = speed_var.get()
-        print(f"Starting Classic Mode with {selected_speed} speed...")  # Placeholder for actual game start logic
+        selected_difficulty = difficulty_var.get()
+        print(f"Starting Trivia Mode with {selected_difficulty} questions...")  # Placeholder for actual game start logic
         trivia_window.destroy()  # Close the settings window
 
     tk.Button(trivia_window, text="Main Menu", command=return_to_main_menu).pack(pady=10)
@@ -61,4 +61,3 @@ def main(precedent_window):
     tk.Button(trivia_window, text="Start Game", command=start_classic_game).pack(pady=10)
 
    
-
