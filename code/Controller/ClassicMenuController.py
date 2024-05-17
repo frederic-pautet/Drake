@@ -1,7 +1,9 @@
 import tkinter as tk
 from tkinter import messagebox
 
-# Ensure the parent directory is in the path
+import sys
+import os
+# import the parent directory in the path to return later to main menu
 parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(0, parent_dir)
 
@@ -44,12 +46,9 @@ def main(precedent_window):
 
     tk.Button(classic_window, text="Main Menu", command=return_to_main_menu).pack(pady=10)
 
-    # Ensure the main menu window reappears if the settings window is closed without starting the game
-    def on_closing():
-        main.create_main_menu()
-        classic_window.destroy()
+    
 
-    classic_window.protocol("WM_DELETE_WINDOW", on_closing)
+   
 
 
   
