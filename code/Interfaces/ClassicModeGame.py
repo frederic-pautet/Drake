@@ -1,3 +1,12 @@
+v=3 # the speed of the snake (1,2 or 3)
+
+if v == 1:
+    delay = 200  # Slow
+elif v == 2:
+    delay = 100  # Medium
+elif v == 3:
+    delay = 50  # Fast
+
 from tkinter import *
 # pour l'aléatoire
 from random import randint
@@ -10,21 +19,23 @@ fenetre = Tk()
 #On change le titre de la fenêtre
 fenetre.title('Drake The Snake')
 
+fenetre.attributes("-fullscreen", True)  #full screen
+
 #On récupère les dimensions de l'écran
 hauteur = fenetre.winfo_screenheight()
 largeur = fenetre.winfo_screenwidth()
 
-#On convertie les données de la hauteur (H) et de la largeur (L) en int, puis en string,
-#et on modifie les dimensions voulues
-H = str(int(hauteur/1.1))
-L = str(int(largeur/2))
+# #On convertie les données de la hauteur (H) et de la largeur (L) en int, puis en string,
+# #et on modifie les dimensions voulues
+# H = str(int(hauteur/1.1))
+# L = str(int(largeur/2))
 
-#On applique la taille voulue à la fenêtre grâce à l'appel de fonction geometry(wxh+X+Y) où:
-# w, h sont respectivement la largeur et la hauteur
-# X et Y sont les coordonnées du point d'origine relativement au coin haut-gauche de la fenêtre
-# le x et les deux + sont des séparateurs
-# pour insérer les variables, on les concatène avec des chaînes de caractères au moyen de l'opérateur de concaténation +
-fenetre.geometry(L + "x" + H + "+0+0")
+# #On applique la taille voulue à la fenêtre grâce à l'appel de fonction geometry(wxh+X+Y) où:
+# # w, h sont respectivement la largeur et la hauteur
+# # X et Y sont les coordonnées du point d'origine relativement au coin haut-gauche de la fenêtre
+# # le x et les deux + sont des séparateurs
+# # pour insérer les variables, on les concatène avec des chaînes de caractères au moyen de l'opérateur de concaténation +
+# fenetre.geometry(L + "x" + H + "+0+0")
 
 ########################################################################################################################
 
@@ -37,12 +48,36 @@ Plateau = Canvas(fenetre, width = LargeurPlateau, height = HauteurPlateau, bg = 
 #"side" désigne l'endroit où débute le canvas
 Plateau.pack(side="bottom")
 
+
+#Frame for score and pause button
+top_frame = Frame(fenetre, bg="light blue")
+top_frame.pack(side="top", fill="x")
+
+
 #On crée un Canvas pour le score
-Barre = Text(fenetre, width = int(largeur /2), height = int(HauteurPlateau / 10), bg = "light blue")
+Barre = Text(top_frame, width = int(largeur /2), height = 2, bg = "light blue")
 #On place la barre
 Barre.pack(side="top")
 #On écrit le score initial dans la barre
 Barre.insert(END, "score: 0\n")
+
+paused = False #initial value of pause is false
+
+def change_pause():
+    global paused
+    paused = not paused
+    if paused:
+        pause_button.config(text="Resume")
+    else:
+        pause_button.config(text="Pause")
+        tache()
+
+# Adding the pause button
+pause_button = Button(top_frame, text="Pause", command=change_pause)
+pause_button.pack(side="right", padx=10, pady=10)
+
+
+
 
 #On défini le nombre de cases du plateau
 NombreDeCases= 75
@@ -53,7 +88,7 @@ HauteurCase = (HauteurPlateau / NombreDeCases)
 
 ########################################################################################################################
 
-#Fonction qui détermine la taille des cases du plateau et qui les colore en vert pour symboliser le serpent
+#Fonction qui détermine la taille des cases du plateau et qui les colore en noir pour symboliser le serpent
 def remplir_case (x, y):
 
     #On défini les coordonnées (origine_caseX1; origine_caseY1) du point en haut à gauche de la case
@@ -204,7 +239,7 @@ def mise_a_jour_snake():
         SNAKE.pop()
 
 #######################################################################################################################################
-        
+
 # réinitialise les variables pour une nouvelle partie
 def reinitialiser_jeu():
 
@@ -220,38 +255,45 @@ def reinitialiser_jeu():
     SCORE = 0
     # variable perdu initiale (sera mise à 1 si le joueur perd)
     PERDU = 0
+    
+    
+
 
 # fonction principale
 def tache():
-
-    # on met à jour l'affichage et les événements du clavier
-    fenetre.update
-    fenetre.update_idletasks()
-    # on met à jour le snake
-    mise_a_jour_snake()
-    # on supprime tous les éléments du plateau
-    Plateau.delete("all")
-    # on redessine le fruit
-    dessine_fruit()
-    # on redessine le serpent
-    dessine_serpent(SNAKE)
-
-    # si on a perdu
-    if PERDU:
-        # on efface la barre des scores
-        Barre.delete(0.0, 3.0)
-        # on affiche perdu
-        Barre.insert(END, "Perdu avec un score de " + str(SCORE))
-        # on prépare la nouvelle partie
-        reinitialiser_jeu()
-        # on rappelle la fonction principale
-        fenetre.after(70, tache)
-    # sinon
-    else:
-        # on rappelle la fonction principale
-        fenetre.after(70, tache)
+    
+    if not paused :
+    
+        # on met à jour l'affichage et les événements du clavier
+        fenetre.update
+        fenetre.update_idletasks()
+        # on met à jour le snake
+        mise_a_jour_snake()
+        # on supprime tous les éléments du plateau
+        Plateau.delete("all")
+        # on redessine le fruit
+        dessine_fruit()
+        # on redessine le serpent
+        dessine_serpent(SNAKE)
+    
+        # si on a perdu
+        if PERDU:
+            # on efface la barre des scores
+            Barre.delete(0.0, 3.0)
+            # on affiche perdu
+            Barre.insert(END, "Perdu avec un score de " + str(SCORE))
+            # on prépare la nouvelle partie
+            reinitialiser_jeu()
+            # on rappelle la fonction principale
+            fenetre.after(70, tache)
+        # sinon
+        else:
+            # on rappelle la fonction principale
+            fenetre.after(delay, tache) #delay defines the speed of the snake
 
 ########################################################################################################################
+
+
 
 # le snake initial: une liste avec une case aléatoire
 SNAKE = [case_aleatoire()]
