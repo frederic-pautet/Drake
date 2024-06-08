@@ -1,4 +1,5 @@
 import tkinter as tk
+import sys
 
 from Interfaces import ClassicMenu
 from Interfaces import TriviaMenu
@@ -41,7 +42,7 @@ def create_main_menu():
 
 def leave_game(root): #to close the program
     root.destroy()
-    exit()
+    sys.exit()
 
 
 if __name__ == "__main__":
