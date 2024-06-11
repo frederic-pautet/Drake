@@ -96,7 +96,7 @@ def show_highscores(root):
 
     # Buttons to switch between different high score categories
     def create_button(text, command):
-        button = tk.Button(highscores_window, text=text, command=command, width=20)
+        button = tk.Button(highscores_window, text=text, command=command, width=20, bg="lightblue")
         button.pack(pady=5)
 
     create_button("Classic Mode", lambda: display_high_scores("Classic"))
