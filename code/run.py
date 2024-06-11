@@ -24,25 +24,28 @@ def create_main_menu():
     root.title("Snake Game Menu")
     root.attributes("-fullscreen", True)  #full screen
     
+
     # Function to create buttons
     def create_button(text, command):
         button = tk.Button(root, text=text, command=lambda: command(root), width=20)
         button.pack(pady=5)
 
-    tk.Label(root, text="Drake The Snake Game:").pack(pady=5)
+    tk.Label(root, text="Drake The Snake Game:", font=("Arial", 24)).pack(pady=5)
     # Buttons for different game modes
     create_button("Classic Mode", ClassicMenu.main)
     create_button("Trivia Mode", TriviaMenu.main)
     create_button("Multiplayer Mode", MultiplayerMenu.main)
     
     # Button to view highscoresd
-    create_button("Highscores", HighscoresWindow.main)
+    create_button("Highscores", HighscoresWindow.show_highscores)
     
     # Button to view main rules
     create_button("Show rules", show_rules)
     
     #Button to leave the game
     create_button("Leave Game", leave_game)
+    
+
     
     # Run the tkinter event loop
     root.mainloop()
