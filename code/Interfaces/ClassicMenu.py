@@ -1,13 +1,15 @@
 import tkinter as tk
 from tkinter import messagebox
 
+
+
 import sys
 import os
 # import the parent directory in the path to return later to main menu
 parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(0, parent_dir)
 
-from main import create_main_menu
+
 
 def main(precedent_window):
     precedent_window.withdraw()
@@ -42,6 +44,7 @@ def main(precedent_window):
 
     # Button to return to main menu
     def return_to_main_menu():
+        from main import create_main_menu
         classic_window.destroy()
         create_main_menu()
 
@@ -56,9 +59,13 @@ def main(precedent_window):
 
     # Function to start the game with selected speed
     def start_classic_game():
+        from Interfaces import ClassicModeGame
         selected_speed = speed_var.get()
         print(f"Starting Classic Mode with {selected_speed} speed...")  # Placeholder for actual game start logic
         classic_window.destroy()  # Close the settings window
+        ClassicModeGame.main(selected_speed)
+        
+        
 
     # Start game button
     tk.Button(classic_window, text="Start Game", command=start_classic_game).pack(pady=10)
