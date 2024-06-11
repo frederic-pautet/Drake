@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
-import json
+
+
 
 import sys
 import os
@@ -11,50 +12,58 @@ sys.path.insert(0, parent_dir)
 
 
 def main(precedent_window):
-    from main import create_main_menu
-
-  
     precedent_window.withdraw()
     # Create a new window for Classic Mode settings
-    trivia_window = tk.Toplevel()
-    trivia_window.title("trivia Mode Settings")
-    trivia_window.attributes("-fullscreen", True)  #full screen
+    classic_window = tk.Toplevel()
+    classic_window.title("Classic Mode Settings")
+    classic_window.attributes("-fullscreen", True)  #full screen
 
     # Function to display the rules
     def show_rules():
-        with open('database/rules.json','r',encoding='utf_8') as f :
-            rules = json.load(f)
-            messagebox.showinfo("Rules", rules["options"]["TriviaMode"])
-    # Label for speed setting
-    tk.Label(trivia_window, text="Select Question difficulty:").pack(pady=5)
+        rules = ("Trivia Mode Rules:\n"
+                 "1. Use arrow keys to move the snake.\n"
+                 "2. Eat the right answeer to grow longer.\n"
+                 "3. Avoid running into walls or the snake's own body.\n"
+                 "4. The game ends if the snake collides with itself or the walls.")
+        messagebox.showinfo("Trivia Mode Rules", rules)
 
-    # Questions setting options
-    difficulty_var = tk.StringVar(value="Medium")
-    difficulties = ["Easy", "Medium", "Hard"]
-    for difficulty in difficulties:
-        tk.Radiobutton(trivia_window, text=difficulty, variable=difficulty_var, value=difficulty).pack(anchor='w')
-
+   
+    # Label for menu title
+    tk.Label(classic_window, text="Trivia Game", font=("Arial", 24)).pack(pady=5)
+   
     # Button to show rules
-    tk.Button(trivia_window, text="Show Rules", command=show_rules, bg="white").pack(pady=5)
+    tk.Button(classic_window, text="Show Rules", command=show_rules).pack(pady=5)
 
 
 
 
     # Button to return to main menu
     def return_to_main_menu():
-        trivia_window.destroy()
+        from run import create_main_menu
+        classic_window.destroy()
         create_main_menu()
+
+    tk.Button(classic_window, text="Main Menu", command=return_to_main_menu).pack(pady=10)
+
+
+
+
+
+
 
 
     # Function to start the game with selected speed
     def start_classic_game():
-        selected_difficulty = difficulty_var.get()
-        print(f"Starting Trivia Mode with {selected_difficulty} questions...")  # Placeholder for actual game start logic
-        trivia_window.destroy()  # Close the settings window
+        from Interfaces import TriviaMode
+        
+        print("Starting Trivia Mode.")  # Placeholder for actual game start logic
+        classic_window.destroy()  # Close the settings window
+        TriviaMode.start_trivia_snake_game()
+        
+        
 
-    tk.Button(trivia_window, text="Main Menu", command=return_to_main_menu).pack(pady=10)
-    
     # Start game button
-    tk.Button(trivia_window, text="Start Game", command=start_classic_game, bg="lightgreen").pack(pady=10)
+    tk.Button(classic_window, text="Start Game", command=start_classic_game).pack(pady=10)
 
-   
+if __name__ == "__main__":
+  main()
