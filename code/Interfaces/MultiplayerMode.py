@@ -3,7 +3,7 @@ from random import randint
 
 import os
 
-def start_multiplayer_snake_game(speed=1, control_scheme='WASD'):
+def start_multiplayer_snake_game(speed, control_scheme='WASD'):
     fenetre = Tk()
     game = MultiplayerSnakeGame(fenetre, speed, control_scheme)
 
@@ -14,11 +14,11 @@ class MultiplayerSnakeGame:
         self.control_scheme = control_scheme
         self.paused = False
 
-        if speed == 1:
+        if speed == 'Slow':
             self.delay = 200  # Slow
-        elif speed == 2:
+        elif speed == 'Medium':
             self.delay = 100  # Medium
-        elif speed == 3:
+        elif speed == 'Fast':
             self.delay = 50  # Fast
 
         self.fenetre.title('Multiplayer Snake Game')
