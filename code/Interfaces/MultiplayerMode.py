@@ -1,6 +1,12 @@
 from tkinter import *
 from random import randint
 
+import os
+
+def start_multiplayer_snake_game(speed=1, control_scheme='WASD'):
+    fenetre = Tk()
+    game = MultiplayerSnakeGame(fenetre, speed, control_scheme)
+
 class MultiplayerSnakeGame:
     def __init__(self, fenetre, speed, control_scheme='WASD'):
         self.fenetre = fenetre
@@ -201,12 +207,39 @@ class MultiplayerSnakeGame:
             self.dessine_serpent(self.snake1, 'blue')
             self.dessine_serpent(self.snake2, 'yellow')
             if self.PERDU:
-                self.Barre.delete(0.0, 3.0)
-                self.Barre.insert(END, f"{self.winner} wins with a score of Snake 1: {len(self.snake1)}, Snake 2: {len(self.snake2)}")
+                
+                self.show_result()
+                
+                # self.Barre.delete(0.0, 3.0)
+                # self.Barre.insert(END, f"{self.winner} wins with a score of Snake 1: {len(self.snake1)}, Snake 2: {len(self.snake2)}")
                 self.reinitialiser_jeu()
                 self.fenetre.after(2000, self.tache)
             else:
                 self.fenetre.after(self.delay, self.tache)
+
+    def show_result(self):
+        result_window = Toplevel(self.fenetre)
+        result_window.title("Game Over")
+        result_window.geometry("300x200")
+        result_message = f"{self.winner} wins with a score of Snake 1: {len(self.snake1)}, Snake 2: {len(self.snake2)}"
+        Label(result_window, text=result_message, font=("Helvetica", 12)).pack(pady=20)
+        
+        def back_to_menu():
+            #pygame.quit()
+            
+           parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+           sys.path.append(parent_dir)
+           
+           result_window.destroy()
+           self.fenetre.destroy()
+           
+           print("importing main")
+           import run
+           run.create_main_menu()
+        Button(result_window, text="Close", command=back_to_menu).pack(pady=20)
+        
+    
+
 
 if __name__ == "__main__":
     fenetre = Tk()
