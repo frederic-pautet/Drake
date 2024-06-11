@@ -3,10 +3,14 @@ from tkinter import messagebox
 import sys
 import json
 
+ 
+
 from Interfaces import ClassicMenu
 from Interfaces import TriviaMenu
 from Interfaces import MultiplayerMenu
 from Interfaces import HighscoresWindow
+
+
 
 def create_main_menu():
     
