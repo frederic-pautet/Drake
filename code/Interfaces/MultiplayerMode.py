@@ -220,8 +220,8 @@ class MultiplayerSnakeGame:
     def show_result(self):
         result_window = Toplevel(self.fenetre)
         result_window.title("Game Over")
-        result_window.geometry("300x200")
-        result_message = f"{self.winner} wins with a score of Snake 1: {len(self.snake1)}, Snake 2: {len(self.snake2)}"
+        result_window.geometry("600x200")
+        result_message = f"{self.winner} wins. The scores are for Snake 1: {len(self.snake1)}, and for Snake 2: {len(self.snake2)}"
         Label(result_window, text=result_message, font=("Helvetica", 12)).pack(pady=20)
         
         def back_to_menu():
@@ -236,11 +236,11 @@ class MultiplayerSnakeGame:
            print("importing main")
            import run
            run.create_main_menu()
-        Button(result_window, text="Close", command=back_to_menu).pack(pady=20)
+        Button(result_window, text="Main Menu", command=back_to_menu).pack(pady=20)
         
     
 
 
 if __name__ == "__main__":
     fenetre = Tk()
-    game = MultiplayerSnakeGame(fenetre, 1, 'WASD')
+    game = MultiplayerSnakeGame(fenetre, 'Fast', 'WASD')
