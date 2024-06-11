@@ -1,0 +1,82 @@
+[
+    {
+        "name": "Player1",
+        "game_mode": "Classic",
+        "score": 100
+    },
+    {
+        "name": "Player2",
+        "game_mode": "Trivia",
+        "score": 200
+    },
+    {
+        "name": "darude",
+        "game_mode": "Classic",
+        "score": 356
+    },
+    {
+        "name": "caramba42",
+        "game_mode": "Classic",
+        "score": 435
+    },
+    {
+        "name": "bigjoe",
+        "game_mode": "Trivia",
+        "score": 4
+    },
+    {
+        "name": "L\u00c3\u00a9ondeLyon",
+        "game_mode": "Classic",
+        "score": 5345
+    },
+    {
+        "name": "ref",
+        "game_mode": "Classic",
+        "score": 0
+    },
+    {
+        "name": "saturne",
+        "game_mode": "Trivia",
+        "score": 2645
+    },
+    {
+        "name": "cardon",
+        "game_mode": "Trivia",
+        "score": 36423
+    },
+    {
+        "name": "glary76",
+        "game_mode": "Classic",
+        "score": 34623
+    },
+    {
+        "name": "citrouille 49",
+        "game_mode": "Classic",
+        "score": 2535
+    },
+    {
+        "name": "dada3",
+        "game_mode": "Trivia",
+        "score": 346
+    },
+    {
+        "name": "carababa",
+        "game_mode": "Classic",
+        "score": 745
+    },
+    {
+        "name": "enzo",
+        "game_mode": "Classic",
+        "score": 12
+    },
+    {
+        "name": "konstantin",
+        "game_mode": "Trivia",
+        "score": 24
+    },
+    {
+        "name": "grfhz",
+        "game_mode": "Classic",
+        "score": 0
+    }
+]
