@@ -1,61 +1,124 @@
 import tkinter as tk
-from tkinter import messagebox
-import sys
 import json
+import os
 
-
-from Interfaces import ClassicMenu
-from Interfaces import TriviaMenu
-from Interfaces import MultiplayerMenu
-from Interfaces import HighscoresWindow
-
-
-
-def create_main_menu():
+def show_highscores(root):
+   
     
-    def start_game(mode):
-        print(f"Starting {mode} mode...")  # Placeholder for actual game logic
+   
+     
     
-    def show_highscores():
-        print("Showing highscores...")  # Placeholder for actual highscores display logic
+    # Get the path to the parallel folder
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    database_folder_path = os.path.join(current_dir, '..', 'database')  # Adjust the folder name accordingly
+    highscores_path = os.path.join(database_folder_path, 'highscores.json')
     
-    # Create the main window
-    root = tk.Tk()
-    root.title("Snake Game Menu")
-    root.attributes("-fullscreen", True)  #full screen
     
-    # Function to create buttons
+    
+    def read_json_file(file_path):
+        with open(file_path, 'r', encoding='utf-8') as file:
+            data = json.load(file)
+        return data
+    
+    
+    def transform_high_scores(data):
+        high_scores = {"Classic": [], "Trivia": []}
+        
+        # Separate scores by game mode
+        for entry in data:
+            game_mode = entry["game_mode"]
+            name = entry["name"]
+            score = entry["score"]
+            high_scores[game_mode].append({"name": name, "score": score})
+            
+            # Sort and format scores, keeping only top 5
+        for mode in high_scores:
+            sorted_scores = sorted(high_scores[mode], key=lambda x: x["score"], reverse=True)[:5]
+            formatted_scores = [f"{i+1}. {entry['name']} - {entry['score']}" for i, entry in enumerate(sorted_scores)]
+            high_scores[mode] = formatted_scores
+    
+        return high_scores
+    
+
+
+
+    # Create a new window for the high scores
+    highscores_window = tk.Toplevel()
+    highscores_window.title("High Scores")
+    highscores_window.attributes("-fullscreen", True)  #full screen
+    
+    # # Hide the main menu window
+    # main_menu_window.withdraw()
+
+    print(read_json_file(highscores_path))  
+    print()
+    print(transform_high_scores(read_json_file(highscores_path)))
+    high_scores_data = transform_high_scores(read_json_file(highscores_path))
+
+   
+    
+    
+    
+    
+
+    # Title for the high scores window
+    title_label = tk.Label(highscores_window, text="High Scores", font=("Arial", 24))
+    title_label.pack(pady=10)
+
+    # Label to show which mode is currently shown
+    current_mode_label = tk.Label(highscores_window, text="Classic Mode High Scores", font=("Arial", 16))
+    current_mode_label.pack(pady=5)
+
+    
+    # Frame to contain the high scores
+    scores_frame = tk.Frame(highscores_window)
+    scores_frame.pack(pady=10)
+
+    # Function to update the displayed high scores
+    def display_high_scores(category):
+
+        # Update the current mode label
+        current_mode_label.config(text=f"{category} Mode High Scores")
+
+      
+        # Clear existing widgets in the frame
+        for widget in scores_frame.winfo_children():
+            widget.destroy()
+
+
+        # Display the high scores for the selected category
+        for score in high_scores_data[category]:
+            label = tk.Label(scores_frame, text=score, padx=10, pady=5)
+            label.pack()
+
+    # Initial display of Classic mode high scores
+    display_high_scores("Classic")
+
+    # Buttons to switch between different high score categories
     def create_button(text, command):
-        button = tk.Button(root, text=text, command=lambda: command(root), width=20)
+        button = tk.Button(highscores_window, text=text, command=command, width=20)
         button.pack(pady=5)
 
-    tk.Label(root, text="Drake The Snake Game:").pack(pady=5)
-    # Buttons for different game modes
-    create_button("Classic Mode", ClassicMenu.main)
-    create_button("Trivia Mode", TriviaMenu.main)
-    create_button("Multiplayer Mode", MultiplayerMenu.main)
-    
-    # Button to view highscoresd
-    create_button("Highscores", HighscoresWindow.main)
-    
-    # Button to view main rules
-    create_button("Show rules", show_rules)
-    
-    #Button to leave the game
-    create_button("Leave Game", leave_game)
-    
-    # Run the tkinter event loop
-    root.mainloop()
+    create_button("Classic Mode", lambda: display_high_scores("Classic"))
+    create_button("Trivia Mode", lambda: display_high_scores("Trivia"))
 
-def show_rules(root):
-    with open('database/rules.json','r',encoding='utf_8') as f :
-        rules = json.load(f)
-        messagebox.showinfo("Rules", rules["main"])
+    # Function to return to the main menu
+    def return_to_main_menu():
+        highscores_window.destroy()
 
-def leave_game(root): #to close the program
-    root.destroy()
-    sys.exit()
 
+    # Add a button to return to the main menu
+    return_button = tk.Button(highscores_window, text="Main Menu", command=return_to_main_menu, width=20)
+    return_button.pack(pady=10)
+
+    # Ensure the main menu window reappears if the high scores window is closed
+    def on_closing():
+
+        highscores_window.destroy()
+
+    highscores_window.protocol("WM_DELETE_WINDOW", on_closing)
 
 if __name__ == "__main__":
-    create_main_menu()
+    root = tk.Tk()
+    show_highscores(root)
+    root.mainloop()
