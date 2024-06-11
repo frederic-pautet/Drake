@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
+import json
 
 import sys
 import os
@@ -21,13 +22,9 @@ def main(precedent_window):
 
     # Function to display the rules
     def show_rules():
-        rules = ("Classic Mode Rules:\n"
-                 "1. Use arrow keys to move the snake.\n"
-                 "2. Eat the correct answe to grow longer and pass the question.\n"
-                 "3. Avoid running into walls or the snake's own body.\n"
-                 "4. The game ends if the snake collides with itself or the walls, or if you select the wrong answer.")
-        messagebox.showinfo("Trivia Mode Rules", rules)
-
+        with open('database/rules.json','r',encoding='utf_8') as f :
+            rules = json.load(f)
+            messagebox.showinfo("Rules", rules["options"]["TriviaMode"])
     # Label for speed setting
     tk.Label(trivia_window, text="Select Question difficulty:").pack(pady=5)
 
@@ -38,7 +35,7 @@ def main(precedent_window):
         tk.Radiobutton(trivia_window, text=difficulty, variable=difficulty_var, value=difficulty).pack(anchor='w')
 
     # Button to show rules
-    tk.Button(trivia_window, text="Show Rules", command=show_rules).pack(pady=5)
+    tk.Button(trivia_window, text="Show Rules", command=show_rules, bg="white").pack(pady=5)
 
 
 
@@ -58,6 +55,6 @@ def main(precedent_window):
     tk.Button(trivia_window, text="Main Menu", command=return_to_main_menu).pack(pady=10)
     
     # Start game button
-    tk.Button(trivia_window, text="Start Game", command=start_classic_game).pack(pady=10)
+    tk.Button(trivia_window, text="Start Game", command=start_classic_game, bg="lightgreen").pack(pady=10)
 
    
