@@ -3,7 +3,6 @@ from tkinter import messagebox
 import sys
 import json
 
- 
 
 from Interfaces import ClassicMenu
 from Interfaces import TriviaMenu
@@ -36,7 +35,7 @@ def create_main_menu():
     create_button("Trivia Mode", TriviaMenu.main)
     create_button("Multiplayer Mode", MultiplayerMenu.main)
     
-    # Button to view highscores
+    # Button to view highscoresd
     create_button("Highscores", HighscoresWindow.main)
     
     # Button to view main rules
