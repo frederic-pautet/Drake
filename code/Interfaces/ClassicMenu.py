@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
-
+import json
 
 
 import sys
@@ -20,12 +20,9 @@ def main(precedent_window):
 
     # Function to display the rules
     def show_rules():
-        rules = ("Classic Mode Rules:\n"
-                 "1. Use arrow keys to move the snake.\n"
-                 "2. Eat food to grow longer.\n"
-                 "3. Avoid running into walls or the snake's own body.\n"
-                 "4. The game ends if the snake collides with itself or the walls.")
-        messagebox.showinfo("Classic Mode Rules", rules)
+        with open('database/rules.json','r',encoding='utf_8') as f :
+            rules = json.load(f)
+            messagebox.showinfo("Rules", rules["options"]["ClassicMode"])
 
     # Label for speed setting
     tk.Label(classic_window, text="Set Snake Speed:").pack(pady=5)
@@ -37,7 +34,7 @@ def main(precedent_window):
         tk.Radiobutton(classic_window, text=speed, variable=speed_var, value=speed).pack(anchor='w')
 
     # Button to show rules
-    tk.Button(classic_window, text="Show Rules", command=show_rules).pack(pady=5)
+    tk.Button(classic_window, text="Show Rules", command=show_rules, bg="white").pack(pady=5)
 
 
 
@@ -68,7 +65,7 @@ def main(precedent_window):
         
 
     # Start game button
-    tk.Button(classic_window, text="Start Game", command=start_classic_game).pack(pady=10)
+    tk.Button(classic_window, text="Start Game", command=start_classic_game, bg="lightgreen").pack(pady=10)
 
 if __name__ == "__main__":
   main()
