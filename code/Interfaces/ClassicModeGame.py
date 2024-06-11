@@ -5,6 +5,8 @@ from random import randint
 import subprocess
 import os
 
+import json
+
 def main(speed):
     # Initialiser Pygame pour les sons
     
@@ -45,6 +47,12 @@ def main(speed):
     NombreDeCases = 75
     LargeurCase = (LargeurPlateau / NombreDeCases)
     HauteurCase = (HauteurPlateau / NombreDeCases)
+    
+    
+    # Get the path to the parallel folder
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    database_folder_path = os.path.join(current_dir, '..', 'database')  # Adjust the folder name accordingly
+    highscores_path = os.path.join(database_folder_path, 'highscores.json')
 
     def remplir_case(x, y):
         OrigineCaseX1 = x * LargeurCase
@@ -144,15 +152,64 @@ def main(speed):
         SCORE = 0
         PERDU = 0
 
+    
+
+
     def afficher_fenetre_perdu():
+        
+        def submit_name() :
+            print("submitting_name")
+            name = name_entry.get()
+            print("submitting_name2")
+            if not name:
+                process_name("unknown", "Classic", SCORE) #default name
+                return
+            else: 
+                process_name(name, "Classic", SCORE)
+            
+        def process_name(name, game_mode, score, filename=highscores_path):
+            print("writing database")
+            data = read_database(filename)
+            new_record = {
+                "name": name,
+                "game_mode": game_mode,
+                "score": score
+                }
+            data.append(new_record)
+            write_database(data, filename)
+            
+        def write_database(data, filename=highscores_path):
+            with open(filename, 'w') as file:
+                json.dump(data, file, indent=4)
+                
+        def read_database(filename=highscores_path):
+            try:
+                with open(filename, 'r') as file:
+                    data = json.load(file)
+            except FileNotFoundError:
+                data = []
+            return data
+        
         fenetre_perdu = Toplevel(fenetre)
         fenetre_perdu.title("Partie Perdue")
         fenetre_perdu.attributes("-fullscreen", True)  # full screen
         fenetre_perdu.geometry("300x200")
 
-        Label(fenetre_perdu, text=f"Score: {SCORE}", font=("Helvetica", 16, "bold")).pack(pady=10)
+        Label(fenetre_perdu, text=f"Score: {SCORE} Entrez votre nom pour enregistrer votre score", font=("Helvetica", 16, "bold")).pack(pady=10)
+
+        name_entry = Entry(fenetre_perdu)
+        name_entry.pack(pady=10)
+        
+        
+        submit_button = Button(fenetre_perdu, text="Submit", command=submit_name)
+        submit_button.pack(pady=10)
+
+
         Button(fenetre_perdu, text="Rejouer", command=lambda: [fenetre_perdu.destroy(), reinitialiser_jeu()]).pack(pady=10)
         Button(fenetre_perdu, text="Back to the menu", command=back_to_menu).pack(pady=10)
+
+
+
 
     def tache():
         fenetre.update()
@@ -175,8 +232,8 @@ def main(speed):
        fenetre.destroy()
        
        print("importing main")
-       import main
-       main.create_main_menu()
+       import run
+       run.create_main_menu()
         
     # Speed intervals mapping
     speed_intervals = {
