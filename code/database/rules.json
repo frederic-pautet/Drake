@@ -1,5 +1,5 @@
 {"main":"The goal is to eat as much apples as possible. \nYou can move your snake up, down, to the right and to the left by pressing the corresponding arrows. \nEach time an apple is eaten, the snake grows and so does your score. \nBe careful ! If you bump into your tail or the walls you lose ! \n \nIn this version of the game, we propose different game modes. \nYou can access to the rules of each game mode by clicking on the corresponding button.",
- "options": {"MultiplayerMode":"To be played with 2 players, each one having control on a different snake. \n      Keys to press: \nBlue player : up, down, right and left arrows \nYellow player : w, s, d and a (respectively)",
+ "options": {"MultiplayerMode":"To be played with 2 players, each one having control on a different snake. \n    Keys to press : \nBlue player : up, down, right and left arrows \nYellow player : w, s, d and a (respectively)",
              "ClassicMode":"I hope you've read the main rules on the previous window, the challenge is real.\n \nTry to make as much point as you can !",
              "TriviaMode":"Now, you don't have to eat apples. \nIndeed, you will be asked questions. If you go on the right answer, your snake will grow.\nBe careful ! If you get it wrong you die."}
 }
