@@ -1,152 +1,204 @@
 from tkinter import *
 from random import randint
+#import pygame
 
-class SnakeGame:
-    def __init__(self, fenetre, speed):
-        self.fenetre = fenetre
-        self.speed = speed
-        self.paused = False
+import subprocess
+import os
 
-        if speed == 1:
-            self.delay = 200  # Slow
-        elif speed == 2:
-            self.delay = 100  # Medium
-        elif speed == 3:
-            self.delay = 50  # Fast
+def main(speed):
+    # Initialiser Pygame pour les sons
+    
+    #pygame.init()
+    
+    #eat_sound = 0
+    #eat_sound = pygame.mixer.Sound('correct.mp3')  
 
-        self.fenetre.title('Drake The Snake')
-        self.fenetre.attributes("-fullscreen", True)
+    # Créer une fenêtre grâce à la fonction Tk()
+    fenetre = Tk()
+    fenetre.title('Drake The Snake')
+    fenetre.attributes("-fullscreen", True)  # full screen
 
-        self.hauteur = fenetre.winfo_screenheight()
-        self.largeur = fenetre.winfo_screenwidth()
+    # Récupérer les dimensions de l'écran
+    hauteur = fenetre.winfo_screenheight()
+    largeur = fenetre.winfo_screenwidth()
 
-        self.LargeurPlateau = self.largeur / 2
-        self.HauteurPlateau = self.hauteur / 1.2
+    # Convertir les données de la hauteur (H) et de la largeur (L) en int, puis en string, et modifie les dimensions voulues
+    H = str(int(hauteur / 1.1))
+    L = str(int(largeur / 2))
+    fenetre.geometry(L + "x" + H + "+0+0")
 
-        self.Plateau = Canvas(fenetre, width=self.LargeurPlateau, height=self.HauteurPlateau, bg="green")
-        self.Plateau.pack(side="bottom")
+    # Définir les dimensions du plateau de jeu
+    LargeurPlateau = largeur / 2
+    HauteurPlateau = hauteur / 1.2
 
-        self.top_frame = Frame(fenetre, bg="light blue")
-        self.top_frame.pack(side="top", fill="x")
+    # Créer un Canvas pour le plateau de jeu
+    Plateau = Canvas(fenetre, width=LargeurPlateau, height=HauteurPlateau, bg="green")
+    Plateau.pack(side="bottom")
 
-        self.Barre = Text(self.top_frame, width=int(self.largeur / 2), height=2, bg="light blue")
-        self.Barre.pack(side="top")
-        self.Barre.insert(END, "score: 0\n")
+    # Créer un Canvas pour le score
+    Barre = Text(fenetre, width=int(largeur / 2), height=int(HauteurPlateau / 10), bg="light blue", font=("Helvetica", 16, "bold"))
+    Barre.pack(side="top")
+    Barre.tag_configure("center", justify='center')
+    Barre.insert("1.0", "score: 0\n", "center")
 
-        self.pause_button = Button(self.top_frame, text="Pause", command=self.change_pause)
-        self.pause_button.pack(side="right", padx=10, pady=10)
+    # Définir le nombre de cases du plateau
+    NombreDeCases = 75
+    LargeurCase = (LargeurPlateau / NombreDeCases)
+    HauteurCase = (HauteurPlateau / NombreDeCases)
 
-        self.NombreDeCases = 75
-        self.LargeurCase = (self.LargeurPlateau / self.NombreDeCases)
-        self.HauteurCase = (self.HauteurPlateau / self.NombreDeCases)
+    def remplir_case(x, y):
+        OrigineCaseX1 = x * LargeurCase
+        OrigineCaseY1 = y * HauteurCase
+        OrigineCaseX2 = OrigineCaseX1 + LargeurCase
+        OrigineCaseY2 = OrigineCaseY1 + HauteurCase
+        Plateau.create_rectangle(OrigineCaseX1, OrigineCaseY1, OrigineCaseX2, OrigineCaseY2, fill="black")
 
-        self.fenetre.bind("<Left>", self.left_key)
-        self.fenetre.bind("<Right>", self.right_key)
-        self.fenetre.bind("<Up>", self.up_key)
-        self.fenetre.bind("<Down>", self.down_key)
-
-        self.reinitialiser_jeu()
-        self.fenetre.after(0, self.tache)
-        self.fenetre.mainloop()
-
-    def change_pause(self):
-        self.paused = not self.paused
-        if self.paused:
-            self.pause_button.config(text="Resume")
-        else:
-            self.pause_button.config(text="Pause")
-            self.tache()
-
-    def remplir_case(self, x, y):
-        OrigineCaseX1 = x * self.LargeurCase
-        OrigineCaseY1 = y * self.HauteurCase
-        OrigineCaseX2 = OrigineCaseX1 + self.LargeurCase
-        OrigineCaseY2 = OrigineCaseY1 + self.HauteurCase
-        self.Plateau.create_rectangle(OrigineCaseX1, OrigineCaseY1, OrigineCaseX2, OrigineCaseY2, fill="black")
-
-    def case_aleatoire(self):
-        AleatoireX = randint(0, self.NombreDeCases - 1)
-        AleatoireY = randint(0, self.NombreDeCases - 1)
+    def case_aleatoire():
+        AleatoireX = randint(0, NombreDeCases - 1)
+        AleatoireY = randint(0, NombreDeCases - 1)
         return (AleatoireX, AleatoireY)
 
-    def dessine_serpent(self):
-        for case in self.SNAKE:
+    def dessine_serpent(snake):
+        for case in snake:
             x, y = case
-            self.remplir_case(x, y)
+            remplir_case(x, y)
 
-    def etre_dans_snake(self, case):
-        return case in self.SNAKE
+    def etre_dans_snake(case):
+        return 1 if case in SNAKE else 0
 
-    def fruit_aleatoire(self):
-        FruitAleatoire = self.case_aleatoire()
-        while self.etre_dans_snake(FruitAleatoire):
-            FruitAleatoire = self.case_aleatoire()
+    def fruit_aleatoire():
+        FruitAleatoire = case_aleatoire()
+        while etre_dans_snake(FruitAleatoire):
+            FruitAleatoire = case_aleatoire()
         return FruitAleatoire
 
-    def dessine_fruit(self):
-        x, y = self.FRUIT
-        OrigineCaseX1 = x * self.LargeurCase
-        OrigineCaseY1 = y * self.HauteurCase
-        OrigineCaseX2 = OrigineCaseX1 + self.LargeurCase
-        OrigineCaseY2 = OrigineCaseY1 + self.HauteurCase
-        self.Plateau.create_oval(OrigineCaseX1, OrigineCaseY1, OrigineCaseX2, OrigineCaseY2, fill="red")
+    def dessine_fruit():
+        global FRUIT
+        x, y = FRUIT
+        OrigineCaseX1 = x * LargeurCase
+        OrigineCaseY1 = y * HauteurCase
+        OrigineCaseX2 = OrigineCaseX1 + LargeurCase
+        OrigineCaseY2 = OrigineCaseY1 + HauteurCase
+        Plateau.create_oval(OrigineCaseX1, OrigineCaseY1, OrigineCaseX2, OrigineCaseY2, fill="red")
 
-    def left_key(self, event):
-        self.MOUVEMENT = (-1, 0)
+    def left_key(event):
+        global MOUVEMENT
+        if MOUVEMENT != (1, 0):  # Empêcher de revenir en arrière
+            MOUVEMENT = (-1, 0)
 
-    def right_key(self, event):
-        self.MOUVEMENT = (1, 0)
+    def right_key(event):
+        global MOUVEMENT
+        if MOUVEMENT != (-1, 0):  # Empêcher de revenir en arrière
+            MOUVEMENT = (1, 0)
 
-    def up_key(self, event):
-        self.MOUVEMENT = (0, -1)
+    def up_key(event):
+        global MOUVEMENT
+        if MOUVEMENT != (0, 1):  # Empêcher de revenir en arrière
+            MOUVEMENT = (0, -1)
 
-    def down_key(self, event):
-        self.MOUVEMENT = (0, 1)
+    def down_key(event):
+        global MOUVEMENT
+        if MOUVEMENT != (0, -1):  # Empêcher de revenir en arrière
+            MOUVEMENT = (0, 1)
 
-    def serpent_mort(self, NouvelleTete):
+    fenetre.bind("<Left>", left_key)
+    fenetre.bind("<Right>", right_key)
+    fenetre.bind("<Up>", up_key)
+    fenetre.bind("<Down>", down_key)
+
+    def serpent_mort(NouvelleTete):
+        global PERDU
         NouvelleTeteX, NouvelleTeteY = NouvelleTete
-        if self.etre_dans_snake(NouvelleTete) and self.MOUVEMENT != (0, 0) or NouvelleTeteX < 0 or NouvelleTeteY < 0 or NouvelleTeteX >= self.NombreDeCases or NouvelleTeteY >= self.NombreDeCases:
-            self.PERDU = 1
 
-    def mise_a_jour_score(self):
-        self.SCORE += 1
-        self.Barre.delete(0.0, 3.0)
-        self.Barre.insert(END, "score: " + str(self.SCORE) + "\n")
+        # si le serpent se mange lui-même (sauf au démarrage, c'est-à-dire: sauf quand MOUVEMENT vaut (0, 0))
+        # OU si on sort du canvas
+        if (etre_dans_snake(NouvelleTete) and MOUVEMENT != (0, 0)) or NouvelleTeteX < 0 or NouvelleTeteY < 0 or NouvelleTeteX >= NombreDeCases or NouvelleTeteY >= NombreDeCases:
+            # alors, on a perdu
+            PERDU = 1
 
-    def mise_a_jour_snake(self):
-        AncienneTeteX, AncienneTeteY = self.SNAKE[0]
-        MouvementX, MouvementY = self.MOUVEMENT
+    def mise_a_jour_score():
+        global SCORE
+        SCORE += 1
+        Barre.delete("1.0", "end")
+        Barre.insert("1.0", "score: " + str(SCORE) + "\n", "center")
+
+    def mise_a_jour_snake():
+        global SNAKE, FRUIT
+        (AncienneTeteX, AncienneTeteY) = SNAKE[0]
+        MouvementX, MouvementY = MOUVEMENT
         NouvelleTete = (AncienneTeteX + MouvementX, AncienneTeteY + MouvementY)
-        self.serpent_mort(NouvelleTete)
-        self.SNAKE.insert(0, NouvelleTete)
-        if NouvelleTete == self.FRUIT:
-            self.FRUIT = self.fruit_aleatoire()
-            self.mise_a_jour_score()
+        serpent_mort(NouvelleTete)
+        SNAKE.insert(0, NouvelleTete)
+        if NouvelleTete == FRUIT:
+            #eat_sound.play()  # Jouer le son quand le serpent mange un fruit
+            FRUIT = fruit_aleatoire()
+            mise_a_jour_score()
         else:
-            self.SNAKE.pop()
+            SNAKE.pop()
 
-    def reinitialiser_jeu(self):
-        self.SNAKE = [self.case_aleatoire()]
-        self.FRUIT = self.fruit_aleatoire()
-        self.MOUVEMENT = (0, 0)
-        self.SCORE = 0
-        self.PERDU = 0
+    def reinitialiser_jeu():
+        global SNAKE, FRUIT, MOUVEMENT, SCORE, PERDU
+        SNAKE = [case_aleatoire()]
+        FRUIT = fruit_aleatoire()
+        MOUVEMENT = (0, 0)
+        SCORE = 0
+        PERDU = 0
 
-    def tache(self):
-        if not self.paused:
-            self.fenetre.update_idletasks()
-            self.mise_a_jour_snake()
-            self.Plateau.delete("all")
-            self.dessine_fruit()
-            self.dessine_serpent()
-            if self.PERDU:
-                self.Barre.delete(0.0, 3.0)
-                self.Barre.insert(END, "Perdu avec un score de " + str(self.SCORE))
-                self.reinitialiser_jeu()
-                self.fenetre.after(70, self.tache)
-            else:
-                self.fenetre.after(self.delay, self.tache)
+    def afficher_fenetre_perdu():
+        fenetre_perdu = Toplevel(fenetre)
+        fenetre_perdu.title("Partie Perdue")
+        fenetre_perdu.attributes("-fullscreen", True)  # full screen
+        fenetre_perdu.geometry("300x200")
+
+        Label(fenetre_perdu, text=f"Score: {SCORE}", font=("Helvetica", 16, "bold")).pack(pady=10)
+        Button(fenetre_perdu, text="Rejouer", command=lambda: [fenetre_perdu.destroy(), reinitialiser_jeu()]).pack(pady=10)
+        Button(fenetre_perdu, text="Back to the menu", command=back_to_menu).pack(pady=10)
+
+    def tache():
+        fenetre.update()
+        fenetre.update_idletasks()
+        mise_a_jour_snake()
+        Plateau.delete("all")
+        dessine_fruit()
+        dessine_serpent(SNAKE)
+        if PERDU:
+            afficher_fenetre_perdu()
+            reinitialiser_jeu()
+        fenetre.after(interval, tache)
+
+    def back_to_menu():
+        #pygame.quit()
+        
+       parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+       sys.path.append(parent_dir)
+       
+       fenetre.destroy()
+       
+       print("importing main")
+       import main
+       main.create_main_menu()
+        
+    # Speed intervals mapping
+    speed_intervals = {
+        'Slow': 200,
+        'Medium': 100,
+        'Fast': 50
+    }
+
+    interval = speed_intervals.get(speed, 100)  # Default to medium if speed is not recognized
+
+    global SNAKE, FRUIT, MOUVEMENT, SCORE, PERDU
+    SNAKE = [case_aleatoire()]
+    FRUIT = fruit_aleatoire()
+    MOUVEMENT = (0, 0)
+    SCORE = 0
+    PERDU = 0
+
+    fenetre.after(0, tache)
+    fenetre.mainloop()
+
+    # Fermer Pygame quand le programme est terminé
+    #pygame.quit()
 
 if __name__ == "__main__":
-    fenetre = Tk()
-    game = SnakeGame(fenetre, 1)
+    main('medium')  # medium by default
