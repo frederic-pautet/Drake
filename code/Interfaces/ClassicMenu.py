@@ -44,7 +44,7 @@ def main(precedent_window):
 
     # Button to return to main menu
     def return_to_main_menu():
-        from main import create_main_menu
+        from run import create_main_menu
         classic_window.destroy()
         create_main_menu()
 
