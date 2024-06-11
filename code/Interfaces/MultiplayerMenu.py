@@ -9,7 +9,7 @@ import os
 parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(0, parent_dir)
 
-from main import create_main_menu
+from run import create_main_menu
 
 def main(precedent_window):
     precedent_window.withdraw()
