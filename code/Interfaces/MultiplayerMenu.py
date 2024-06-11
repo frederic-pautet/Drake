@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
-
+import json
 
 
 import sys
@@ -19,13 +19,10 @@ def main(precedent_window):
     classic_window.attributes("-fullscreen", True)  #full screen
 
     # Function to display the rules
-    def show_rules():
-        rules = ("Multiplayer Mode Rules:\n"
-                 "1. Use arrow keys and wasd keys to move the snakes.\n"
-                 "2. Eat food to grow longer.\n"
-                 "3. Avoid running into walls or the snake's own body or the other snake's body.\n"
-                 "4. The game ends if one snake collides with itself, the walls, or the other snake.")
-        messagebox.showinfo("Classic Mode Rules", rules)
+  def show_rules():
+        with open('database/rules.json','r',encoding='utf_8') as f :
+            rules = json.load(f)
+            messagebox.showinfo("Rules", rules["options"]["MultiplayerMode"])
 
     # Label for speed setting
     tk.Label(classic_window, text="Set Snake Speed:").pack(pady=5)
@@ -37,7 +34,7 @@ def main(precedent_window):
         tk.Radiobutton(classic_window, text=speed, variable=speed_var, value=speed).pack(anchor='w')
 
     # Button to show rules
-    tk.Button(classic_window, text="Show Rules", command=show_rules).pack(pady=5)
+    tk.Button(classic_window, text="Show Rules", command=show_rules, bg="white").pack(pady=5)
 
 
 
@@ -50,12 +47,6 @@ def main(precedent_window):
     tk.Button(classic_window, text="Main Menu", command=return_to_main_menu).pack(pady=10)
 
 
-
-
-
-
-
-
     # Function to start the game with selected speed
     def start_multiplayer_game():
         from Interfaces import MultiplayerMode
@@ -65,7 +56,7 @@ def main(precedent_window):
         MultiplayerMode.start_multiplayer_snake_game(selected_speed, control_scheme='WASD')
 
     # Start game button
-    tk.Button(classic_window, text="Start Game", command=start_multiplayer_game).pack(pady=10)
+    tk.Button(classic_window, text="Start Game", command=start_multiplayer_game, bg="lightgreen").pack(pady=10)
 
 if __name__ == "__main__":
     rfa = tk.Toplevel()
