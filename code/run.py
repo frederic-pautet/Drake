@@ -26,24 +26,24 @@ def create_main_menu():
     
 
     # Function to create buttons
-    def create_button(text, command):
-        button = tk.Button(root, text=text, command=lambda: command(root), width=20)
+    def create_button(text, command, color):
+        button = tk.Button(root, text=text, command=lambda: command(root), width=20, bg=color)
         button.pack(pady=5)
 
     tk.Label(root, text="Drake The Snake Game:", font=("Arial", 24)).pack(pady=5)
     # Buttons for different game modes
-    create_button("Classic Mode", ClassicMenu.main)
-    create_button("Trivia Mode", TriviaMenu.main)
-    create_button("Multiplayer Mode", MultiplayerMenu.main)
+    create_button("Classic Mode", ClassicMenu.main, "lightblue")
+    create_button("Trivia Mode", TriviaMenu.main, "lightblue")
+    create_button("Multiplayer Mode", MultiplayerMenu.main, "lightblue")
     
     # Button to view highscoresd
-    create_button("Highscores", HighscoresWindow.show_highscores)
+    create_button("Highscores", HighscoresWindow.show_highscores, "lightyellow")
     
     # Button to view main rules
-    create_button("Show rules", show_rules)
+    create_button("Show rules", show_rules, "white")
     
     #Button to leave the game
-    create_button("Leave Game", leave_game)
+    create_button("Leave Game", leave_game, "lightgreen")
     
 
     
