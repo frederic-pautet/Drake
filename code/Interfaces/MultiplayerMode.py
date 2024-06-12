@@ -223,10 +223,11 @@ class MultiplayerSnakeGame:
         result_window.geometry("600x200")
         result_message = f"{self.winner} wins. The scores are for Snake 1: {len(self.snake1)}, and for Snake 2: {len(self.snake2)}"
         Label(result_window, text=result_message, font=("Helvetica", 12)).pack(pady=20)
+        # Button play again
+        Button(result_window, text="Play again", command=lambda: [result_window.destroy(), start_multiplayer_snake_game(selected_speed, control_scheme='WASD')]).pack(pady=20)
         
         def back_to_menu():
-            #pygame.quit()
-            
+           import sys 
            parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
            sys.path.append(parent_dir)
            
@@ -236,6 +237,7 @@ class MultiplayerSnakeGame:
            print("importing main")
            import run
            run.create_main_menu()
+        # Button return main menu
         Button(result_window, text="Main Menu", command=back_to_menu).pack(pady=20)
         
     
