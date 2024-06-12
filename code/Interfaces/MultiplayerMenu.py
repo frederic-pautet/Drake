@@ -19,7 +19,7 @@ def main(precedent_window):
     classic_window.attributes("-fullscreen", True)  #full screen
 
     # Function to display the rules
-  def show_rules():
+    def show_rules():
         with open('database/rules.json','r',encoding='utf_8') as f :
             rules = json.load(f)
             messagebox.showinfo("Rules", rules["options"]["MultiplayerMode"])
