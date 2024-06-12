@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import messagebox
 
 
-
+import json
 import sys
 import os
 # import the parent directory in the path to return later to main menu
@@ -19,13 +19,10 @@ def main(precedent_window):
     classic_window.attributes("-fullscreen", True)  #full screen
 
     # Function to display the rules
-    def show_rules():
-        rules = ("Trivia Mode Rules:\n"
-                 "1. Use arrow keys to move the snake.\n"
-                 "2. Eat the right answeer to grow longer.\n"
-                 "3. Avoid running into walls or the snake's own body.\n"
-                 "4. The game ends if the snake collides with itself or the walls.")
-        messagebox.showinfo("Trivia Mode Rules", rules)
+def show_rules(root):
+    with open('database/rules.json','r',encoding='utf_8') as f :
+        rules = json.load(f)
+        messagebox.showinfo("Rules", rules["main"])
 
    
     # Label for menu title
