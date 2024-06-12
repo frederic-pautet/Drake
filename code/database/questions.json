@@ -1,4 +1,4 @@
-{
+[
     {
         "question": "What is the smallest country in the world?",
         "options": ["A. Vatican City", "B. Liechtenstein", "C. Monaco", "D. Nauru"],
@@ -159,4 +159,4 @@
         "options": ["A. Mother Teresa", "B. Marie Curie", "C. Rosalind Franklin", "D. Malala Yousafzai"],
         "answer": "B"
     }
-}
+]
