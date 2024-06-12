@@ -1,20 +1,9 @@
 from tkinter import *
 from random import randint
-#import pygame
-
-import subprocess
 import os
-
 import json
 
 def main(speed):
-    # Initialiser Pygame pour les sons
-    
-    #pygame.init()
-    
-    #eat_sound = 0
-    #eat_sound = pygame.mixer.Sound('correct.mp3')  
-
     # Créer une fenêtre grâce à la fonction Tk()
     fenetre = Tk()
     fenetre.title('Drake The Snake')
@@ -47,7 +36,6 @@ def main(speed):
     NombreDeCases = 75
     LargeurCase = (LargeurPlateau / NombreDeCases)
     HauteurCase = (HauteurPlateau / NombreDeCases)
-    
     
     # Get the path to the parallel folder
     current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -145,43 +133,41 @@ def main(speed):
             SNAKE.pop()
 
     def reinitialiser_jeu():
-        global SNAKE, FRUIT, MOUVEMENT, SCORE, PERDU
+        global SNAKE, FRUIT, MOUVEMENT, SCORE, PERDU, GAME_OVER_SHOWN
         SNAKE = [case_aleatoire()]
         FRUIT = fruit_aleatoire()
         MOUVEMENT = (0, 0)
         SCORE = 0
         PERDU = 0
-
-    
-
+        GAME_OVER_SHOWN = False
 
     def afficher_fenetre_perdu():
-        
-        def submit_name() :
-            print("submitting_name")
+        global GAME_OVER_SHOWN
+        if GAME_OVER_SHOWN:
+            return
+        GAME_OVER_SHOWN = True
+
+        def submit_name(local_score):
             name = name_entry.get()
-            print("submitting_name2")
             if not name:
-                process_name("unknown", "Classic", SCORE) #default name
-                return
-            else: 
-                process_name(name, "Classic", SCORE)
-            
+                process_name("unknown", "Classic", local_score)  # default name
+            else:
+                process_name(name, "Classic", local_score)
+
         def process_name(name, game_mode, score, filename=highscores_path):
-            print("writing database")
             data = read_database(filename)
             new_record = {
                 "name": name,
                 "game_mode": game_mode,
                 "score": score
-                }
+            }
             data.append(new_record)
             write_database(data, filename)
-            
+
         def write_database(data, filename=highscores_path):
             with open(filename, 'w') as file:
                 json.dump(data, file, indent=4)
-                
+
         def read_database(filename=highscores_path):
             try:
                 with open(filename, 'r') as file:
@@ -189,27 +175,22 @@ def main(speed):
             except FileNotFoundError:
                 data = []
             return data
-        
+
         fenetre_perdu = Toplevel(fenetre)
         fenetre_perdu.title("Partie Perdue")
         fenetre_perdu.attributes("-fullscreen", True)  # full screen
         fenetre_perdu.geometry("300x200")
-
+        local_score = SCORE
         Label(fenetre_perdu, text=f"Score: {SCORE} Entrez votre nom pour enregistrer votre score", font=("Helvetica", 16, "bold")).pack(pady=10)
 
         name_entry = Entry(fenetre_perdu)
         name_entry.pack(pady=10)
-        
-        
-        submit_button = Button(fenetre_perdu, text="Submit", command=submit_name)
+
+        submit_button = Button(fenetre_perdu, text="Submit", command=lambda: submit_name(local_score))
         submit_button.pack(pady=10)
 
-
-        Button(fenetre_perdu, text="Rejouer", command=lambda: [fenetre_perdu.destroy(), reinitialiser_jeu()]).pack(pady=10)
-        Button(fenetre_perdu, text="Back to the menu", command=back_to_menu).pack(pady=10)
-
-
-
+        Button(fenetre_perdu, text="Rejouer", command=lambda: [reinitialiser_jeu()]).pack(pady=10)
+        Button(fenetre_perdu, text="Back to the menu", command=lambda: [back_to_menu()]).pack(pady=10)
 
     def tache():
         fenetre.update()
@@ -220,21 +201,17 @@ def main(speed):
         dessine_serpent(SNAKE)
         if PERDU:
             afficher_fenetre_perdu()
-            reinitialiser_jeu()
-        fenetre.after(interval, tache)
+        else:
+            fenetre.after(interval, tache)
 
     def back_to_menu():
-        #pygame.quit()
-       import sys 
-       parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-       sys.path.append(parent_dir)
-       
-       fenetre.destroy()
-       
-       print("importing main")
-       import run
-       run.create_main_menu()
-        
+        parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        sys.path.append(parent_dir)
+        fenetre.destroy()
+        print("importing main")
+        import run
+        run.create_main_menu()
+
     # Speed intervals mapping
     speed_intervals = {
         'Slow': 200,
@@ -244,18 +221,16 @@ def main(speed):
 
     interval = speed_intervals.get(speed, 100)  # Default to medium if speed is not recognized
 
-    global SNAKE, FRUIT, MOUVEMENT, SCORE, PERDU
+    global SNAKE, FRUIT, MOUVEMENT, SCORE, PERDU, GAME_OVER_SHOWN
     SNAKE = [case_aleatoire()]
     FRUIT = fruit_aleatoire()
     MOUVEMENT = (0, 0)
     SCORE = 0
     PERDU = 0
+    GAME_OVER_SHOWN = False
 
     fenetre.after(0, tache)
     fenetre.mainloop()
 
-    # Fermer Pygame quand le programme est terminé
-    #pygame.quit()
-
 if __name__ == "__main__":
-    main('medium')  # medium by default
+    main('Medium')  # medium by default
