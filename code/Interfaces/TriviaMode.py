@@ -171,7 +171,7 @@ def start_trivia_snake_game():
         question = questions[index_question]
         options = question["options"]
         Plateau.create_text(LargeurPlateau / 2, HauteurPlateau / 2 - 20, text=question["question"], fill="white")
-        positions = [(3, 3), (3, NombreDeCases - 6), (NombreDeCases - 6, 3), (NombreDeCases - 6, NombreDeCases - 6)]
+        positions = [(20, 20), (20, NombreDeCases - 20), (NombreDeCases - 20, 20), (NombreDeCases - 20, NombreDeCases - 20)]
         for i, option in enumerate(options):
             x, y = positions[i]
             Plateau.create_text(x * LargeurCase, y * HauteurCase, text=option, fill="white", anchor="nw")
@@ -185,7 +185,7 @@ def start_trivia_snake_game():
         print(f"index_question2: {index_question}")
     
         question = questions[index_question]
-        reponses = {"A": (3, 3), "B": (3, NombreDeCases - 6), "C": (NombreDeCases - 6, 3), "D": (NombreDeCases - 6, NombreDeCases - 6)}
+        reponses = {"A": (20, 20), "B": (20, NombreDeCases - 20), "C": (NombreDeCases - 20, 20), "D": (NombreDeCases - 20, NombreDeCases - 20)}
         reponse_choisie = None
         for rep, pos in reponses.items():
             print(rep, pos)
