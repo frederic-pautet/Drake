@@ -260,11 +260,11 @@ def start_trivia_snake_game():
                     process_name(name, "Trivia", SCORE)
             
             
-            submit_button = Button(fenetre_perdu, text="Submit", command=submit_name)
+            submit_button = Button(fenetre_perdu, text="Submit", command=submit_name, bg="lightgreen")
             submit_button.pack(pady=10)
 
 
-            Button(fenetre_perdu, text="Rejouer", command=lambda: [fenetre_perdu.destroy(), reinitialiser_jeu()]).pack(pady=10)
+            Button(fenetre_perdu, text="Rejouer", bg="lightgreen", command=lambda: [fenetre_perdu.destroy(), reinitialiser_jeu()]).pack(pady=10)
             Button(fenetre_perdu, text="Back to the menu", command=back_to_menu).pack(pady=10)
             
             
