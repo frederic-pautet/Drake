@@ -29,7 +29,7 @@ def show_rules(root):
     tk.Label(classic_window, text="Trivia Game", font=("Arial", 24)).pack(pady=5)
    
     # Button to show rules
-    tk.Button(classic_window, text="Show Rules", command=show_rules).pack(pady=5)
+    tk.Button(classic_window, text="Show Rules", command=show_rules, bg="white").pack(pady=5)
 
 
 
@@ -60,7 +60,7 @@ def show_rules(root):
         
 
     # Start game button
-    tk.Button(classic_window, text="Start Game", command=start_classic_game).pack(pady=10)
+    tk.Button(classic_window, text="Start Game", command=start_classic_game, bg="lightgreen").pack(pady=10)
 
 if __name__ == "__main__":
   main()
