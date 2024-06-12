@@ -224,7 +224,7 @@ class MultiplayerSnakeGame:
         result_message = f"{self.winner} wins. The scores are for Snake 1: {len(self.snake1)}, and for Snake 2: {len(self.snake2)}"
         Label(result_window, text=result_message, font=("Helvetica", 12)).pack(pady=20)
         # Button play again
-        Button(result_window, text="Play again", command=lambda: [result_window.destroy(), start_multiplayer_snake_game(selected_speed, control_scheme='WASD')]).pack(pady=20)
+        Button(result_window, text="Play again", bg="lightgreen", command=lambda: [result_window.destroy(), start_multiplayer_snake_game(selected_speed, control_scheme='WASD')]).pack(pady=20)
         
         def back_to_menu():
            import sys 
