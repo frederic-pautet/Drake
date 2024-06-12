@@ -43,7 +43,7 @@ def create_main_menu():
     create_button("Show rules", show_rules, "white")
     
     #Button to leave the game
-    create_button("Leave Game", leave_game, "lightgreen")
+    create_button("Leave Game", leave_game, "orange")
     
 
     
