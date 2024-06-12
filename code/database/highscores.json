@@ -1,77 +1,52 @@
 [
     {
-        "name": "Player1",
-        "game_mode": "Classic",
-        "score": 10
-    },
-    {
-        "name": "Player2",
-        "game_mode": "Trivia",
-        "score": 20
-    },
-    {
-        "name": "darude",
-        "game_mode": "Classic",
-        "score": 35
-    },
-    {
-        "name": "caramba42",
-        "game_mode": "Classic",
-        "score": 43
-    },
-    {
-        "name": "bigjoe",
-        "game_mode": "Trivia",
-        "score": 4
-    },
-    {
-        "name": "OL",
-        "game_mode": "Classic",
-        "score": 53
-    },
-    {
-        "name": "ref",
+        "name": "empty",
         "game_mode": "Classic",
         "score": 0
     },
     {
-        "name": "saturne",
-        "game_mode": "Trivia",
-        "score": 26
-    },
-    {
-        "name": "cardon",
-        "game_mode": "Trivia",
-        "score": 36
-    },
-    {
-        "name": "glary76",
+        "name": "empty",
         "game_mode": "Classic",
-        "score": 3
+        "score": 0
     },
     {
-        "name": "citrouille 49",
+        "name": "empty",
         "game_mode": "Classic",
-        "score": 25
+        "score": 0
     },
     {
-        "name": "dada3",
+        "name": "empty",
+        "game_mode": "Classic",
+        "score": 0
+    },
+    {
+        "name": "empty",
+        "game_mode": "Classic",
+        "score": 0
+    },
+    {
+        "name": "empty",
         "game_mode": "Trivia",
-        "score": 6
+        "score": 0
     },
     {
-        "name": "carababa",
-        "game_mode": "Classic",
-        "score": 7
-    },
-    {
-        "name": "enzo",
-        "game_mode": "Classic",
-        "score": 12
-    },
-    {
-        "name": "konstantin",
+        "name": "empty",
         "game_mode": "Trivia",
-        "score": 24
+        "score": 0
+    },
+    {
+        "name": "empty",
+        "game_mode": "Trivia",
+        "score": 0
+    },
+    {
+        "name": "empty",
+        "game_mode": "Trivia",
+        "score": 0
+    },
+    {
+        "name": "empty",
+        "game_mode": "Trivia",
+        "score": 0
     }
 ]
