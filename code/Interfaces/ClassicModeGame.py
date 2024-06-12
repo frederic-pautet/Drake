@@ -186,10 +186,10 @@ def main(speed):
         name_entry = Entry(fenetre_perdu)
         name_entry.pack(pady=10)
 
-        submit_button = Button(fenetre_perdu, text="Submit", command=lambda: submit_name(local_score))
+        submit_button = Button(fenetre_perdu, text="Submit", command=lambda: submit_name(local_score), bg="lightyellow")
         submit_button.pack(pady=10)
 
-        Button(fenetre_perdu, text="Rejouer", command=lambda: [reinitialiser_jeu()]).pack(pady=10)
+        Button(fenetre_perdu, text="Rejouer", bg="lightgreen", command=lambda: [reinitialiser_jeu()]).pack(pady=10)
         Button(fenetre_perdu, text="Back to the menu", command=lambda: [back_to_menu()]).pack(pady=10)
 
     def tache():
