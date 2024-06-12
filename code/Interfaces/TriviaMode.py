@@ -84,6 +84,7 @@ def start_trivia_snake_game():
     questions = charger_questions()
     shuffle(questions)
     index_question = 0
+    new_index = 0
 
     def remplir_case(x, y):
         OrigineCaseX1 = x * LargeurCase
@@ -160,13 +161,13 @@ def start_trivia_snake_game():
         SNAKE = [case_aleatoire()]
         MOUVEMENT = (0, 0)
         SCORE = 0
-        PERDU = 0
+        PERDU = False
         questions = charger_questions()  # Recharger et mélanger les questions
         shuffle(questions)
         index_question = 0
         question_affichee = False
 
-    def afficher_question():
+    def afficher_question(index_question):
         question = questions[index_question]
         options = question["options"]
         Plateau.create_text(LargeurPlateau / 2, HauteurPlateau / 2 - 20, text=question["question"], fill="white")
@@ -175,58 +176,77 @@ def start_trivia_snake_game():
             x, y = positions[i]
             Plateau.create_text(x * LargeurCase, y * HauteurCase, text=option, fill="white", anchor="nw")
 
-    def verifier_reponse():
-        global index_question, PERDU
+    def verifier_reponse(index_question, PERDU=False):
+        print(f"index_question: {index_question}")
+        global new_index
+        
+        if index_question != 0:
+            index_question = new_index
+        print(f"index_question2: {index_question}")
+    
         question = questions[index_question]
         reponses = {"A": (3, 3), "B": (3, NombreDeCases - 6), "C": (NombreDeCases - 6, 3), "D": (NombreDeCases - 6, NombreDeCases - 6)}
         reponse_choisie = None
         for rep, pos in reponses.items():
+            print(rep, pos)
             if SNAKE[0] == pos:
-                reponse_choisie = rep
-                break
-        if reponse_choisie == question["answer"]:
-            #correct_sound.play()
-            index_question += 1
-            mise_a_jour_score()
-            if index_question >= len(questions):
-                afficher_felicitations()
-                index_question = 0  # Recommence les questions si toutes sont répondues
-            else :
-                #wrong_sound.play()
-                PERDU = 1
-       
-
+                reponse_choisie = str(rep)
+                print(reponse_choisie)
+                
+                if reponse_choisie == question["answer"]:
+                    # correct_sound.play()
+                    index_question += 1
+                    mise_a_jour_score()
+                    mise_a_jour_snake()
+                    question_affichee = False
+                    if index_question >= len(questions):
+                        afficher_felicitations()
+                        index_question = 0  # Recommence les questions si toutes sont répondues
+                    
+                    return index_question
+                else:
+                    return -1  # Wrong answer
+            
+        return index_question  # If no matching position found
 
     def afficher_felicitations():
         Plateau.create_text(LargeurPlateau / 2, HauteurPlateau / 2, text="Félicitations ! Vous avez répondu à toutes les questions !", fill="yellow", font=("Helvetica", 24))
-
+    
     def tache():
+        global index_question, new_index, PERDU
         if not PERDU:
             fenetre.update()
             fenetre.update_idletasks()
             mise_a_jour_snake()
-            verifier_reponse()
+            
+            new_index = verifier_reponse(index_question)
+            index_question = new_index
+            
+            print(f"new_index: {new_index}")
+            
             Plateau.delete("all")
             dessine_serpent(SNAKE)
-            afficher_question()
+            afficher_question(index_question)
+            
+            if new_index == -1:
+                PERDU = True
+    
             fenetre.after(100, tache)
-        else:
+    
+        elif PERDU:
             Barre.delete(0.0, 3.0)
             Barre.insert(END, "Perdu avec un score de " + str(SCORE))
-            
-            
-            
             
             fenetre_perdu = Toplevel(fenetre)
             fenetre_perdu.title("Partie Perdue")
             fenetre_perdu.attributes("-fullscreen", True)  # full screen
             fenetre_perdu.geometry("300x200")
-
+    
             Label(fenetre_perdu, text=f"Score: {SCORE} Entrez votre nom pour enregistrer votre score", font=("Helvetica", 16, "bold")).pack(pady=10)
-
+    
             name_entry = Entry(fenetre_perdu)
             name_entry.pack(pady=10)
-            
+
             
             
             def submit_name() :
@@ -250,7 +270,7 @@ def start_trivia_snake_game():
             
     def back_to_menu():
         #pygame.quit()
-        
+       import sys
        parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
        sys.path.append(parent_dir)
        
@@ -268,9 +288,6 @@ def start_trivia_snake_game():
 
     fenetre.after(0, tache)
     fenetre.mainloop()
-
-    # Fermer Pygame quand le programme est terminé
-    #pygame.quit()
 
 # If you want to run the game directly from this script
 if __name__ == "__main__":
