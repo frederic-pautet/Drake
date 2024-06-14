@@ -1,4 +1,4 @@
-#**Drake the Snake**
+#**Drake the Snake**#
 
 *Interfaces :*
 - [Main menu](#menu)
