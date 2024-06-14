@@ -10,11 +10,6 @@
         "score": 13
     },
     {
-        "name": "ref",
-        "game_mode": "Classic",
-        "score": 0
-    },
-    {
         "name": "saturne",
         "game_mode": "Trivia",
         "score": 6
@@ -28,36 +23,6 @@
         "name": "glary76",
         "game_mode": "Classic",
         "score": 3
-    },
-    {
-        "name": "bouya",
-        "game_mode": "Classic",
-        "score": 0
-    },
-    {
-        "name": "ttt",
-        "game_mode": "Classic",
-        "score": 0
-    },
-    {
-        "name": "Tmax",
-        "game_mode": "Trivia",
-        "score": 2
-    },
-    {
-        "name": "Tmax",
-        "game_mode": "Trivia",
-        "score": 2
-    },
-    {
-        "name": "AliceLpbEtNonPasToiAlice2",
-        "game_mode": "Classic",
-        "score": 0
-    },
-    {
-        "name": "AliceLpbEtNonPasToiAlice2",
-        "game_mode": "Classic",
-        "score": 0
     },
     {
         "name": "pascool",
@@ -88,50 +53,5 @@
         "name": "drake",
         "game_mode": "Classic",
         "score": 0
-    },
-    {
-        "name": "loser",
-        "game_mode": "Trivia",
-        "score": 1
-    },
-    {
-        "name": "test",
-        "game_mode": "Classic",
-        "score": 0
-    },
-    {
-        "name": "test2",
-        "game_mode": "Classic",
-        "score": 0
-    },
-    {
-        "name": "test",
-        "game_mode": "Trivia",
-        "score": 5
-    },
-    {
-        "name": "test",
-        "game_mode": "Classic",
-        "score": 0
-    },
-    {
-        "name": "test2",
-        "game_mode": "Classic",
-        "score": 0
-    },
-    {
-        "name": "test3",
-        "game_mode": "Classic",
-        "score": 1
-    },
-    {
-        "name": "testttt",
-        "game_mode": "Classic",
-        "score": 1
-    },
-    {
-        "name": "testtttttttttttttttt",
-        "game_mode": "Classic",
-        "score": 1
     }
 ]
