@@ -1,0 +1,97 @@
+[
+    {
+        "name": "Player1",
+        "game_mode": "Classic",
+        "score": 10
+    },
+    {
+        "name": "Player2",
+        "game_mode": "Trivia",
+        "score": 13
+    },
+    {
+        "name": "ref",
+        "game_mode": "Classic",
+        "score": 0
+    },
+    {
+        "name": "saturne",
+        "game_mode": "Trivia",
+        "score": 6
+    },
+    {
+        "name": "cardon",
+        "game_mode": "Trivia",
+        "score": 3
+    },
+    {
+        "name": "glary76",
+        "game_mode": "Classic",
+        "score": 3
+    },
+    {
+        "name": "bouya",
+        "game_mode": "Classic",
+        "score": 0
+    },
+    {
+        "name": "ttt",
+        "game_mode": "Classic",
+        "score": 0
+    },
+    {
+        "name": "Tmax",
+        "game_mode": "Trivia",
+        "score": 2
+    },
+    {
+        "name": "Tmax",
+        "game_mode": "Trivia",
+        "score": 2
+    },
+    {
+        "name": "AliceLpbEtNonPasToiAlice2",
+        "game_mode": "Classic",
+        "score": 0
+    },
+    {
+        "name": "AliceLpbEtNonPasToiAlice2",
+        "game_mode": "Classic",
+        "score": 0
+    },
+    {
+        "name": "pascool",
+        "game_mode": "Trivia",
+        "score": 3
+    },
+    {
+        "name": "raviole",
+        "game_mode": "Trivia",
+        "score": 9
+    },
+    {
+        "name": "unknown",
+        "game_mode": "Classic",
+        "score": 0
+    },
+    {
+        "name": "qgfdgnc",
+        "game_mode": "Classic",
+        "score": 0
+    },
+    {
+        "name": "loser",
+        "game_mode": "Trivia",
+        "score": 2
+    },
+    {
+        "name": "drake",
+        "game_mode": "Classic",
+        "score": 0
+    },
+    {
+        "name": "loser",
+        "game_mode": "Trivia",
+        "score": 1
+    }
+]
