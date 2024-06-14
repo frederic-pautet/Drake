@@ -2,6 +2,7 @@ from tkinter import *
 from random import randint
 import os
 import json
+import sys
 
 def main(speed):
     # Créer une fenêtre grâce à la fonction Tk()
