@@ -1,4 +1,4 @@
-***Drake the Snake***
+#**Drake the Snake**
 
 *Interfaces :*
 - [Main menu](#menu)
@@ -7,7 +7,7 @@
 - [Trivia mode](#trivia)
 
  <a name="menu"></a>
- **Drake The Snake (menu)**
+ ##**Drake The Snake (menu)**
 
 This project is a graphical user interface (GUI) for the Snake Game Menu using Tkinter in Python. The menu allows users to select different game modes, view highscores, show game rules, and exit the game. The game modes include Classic, Trivia, and Multiplayer. library for the graphical interface and Pygame for sound effects.
 
@@ -97,7 +97,7 @@ show\_rules(root): Reads and displays the game rules from rules.json in a messag
 leave\_game(root): Closes the application.
 
  <a name="classic"></a>
-**Drake The Snake (classic mode)**
+##**Drake The Snake (classic mode)**
 
 This is a classic Snake game implemented using Python's Tkinter library for the graphical interface and Pygame for sound effects.
 
@@ -150,15 +150,9 @@ based on the screen size. 2.
 - afficher\_fenetre\_perdu(): Displays a game-over window with the score and options to replay.
 
  <a name="multi"></a>
-**Drake The Snake (multiplayer mode)**
+##**Drake The Snake (multiplayer mode)**
 
 This is a Python implementation of a multiplayer snake game using the Tkinter library for the graphical user interface.
-
-**Table of Contents**
-
-- Features (#features)
-- [Configuration](#_page4_x0.00_y842.00)
-- [Code Explanation](#_page4_x0.00_y842.00)
 
 **Features**
 
@@ -220,7 +214,7 @@ You can customize the game speed and control scheme when starting the game by ca
 - show\_result: Displays the game over screen with options to play again or return to the main menu.
 
  <a name="trivia"></a>
-**Drake The Snake (trivia mode)**
+##**Drake The Snake (trivia mode)**
 
 This project is a trivia mode for the "Drake The Snake" game, combining the classic Snake gameplay with trivia questions. The game is developed using Tkinter for the GUI and Pygame for sound effects.
 
