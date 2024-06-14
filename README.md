@@ -88,39 +88,6 @@ leave\_game(root): Closes the application.
 
 This is a classic Snake game implemented using Python's Tkinter library for the graphical interface and Pygame for sound effects.
 
-**Table of Contents**
-
-- Installation
-- Usage
-- How to Play
-- Code Overview
-
-**Installation**
-
-Instructions on how to install the project.### Prerequisites
-
-- Python 3.x
-- Tkinter (usually comes pre-installed with Python)
-- Pygame
-
-**Steps**
-
-1\.
-
-Clone the repository:
-
-git clone https://github.com/yourusername/drake-the-snake.git cd drake-the-snake
-
-2\.
-
-Install Pygame:
-
-pip install pygame
-
-3\.
-
-Ensure you have the correct.mp3 sound file in the same directory as your script.
-
 **How to Play**
 
 Use the arrow keys to control the direction of the snake. The goal is to eat the red fruits that appear on the screen. Each fruit increases your score by 1 and makes the snake longer. The game ends if the snake collides with the screen edges or itself.
@@ -176,8 +143,6 @@ This is a Python implementation of a multiplayer snake game using the Tkinter li
 **Table of Contents**
 
 - Features (#features)
-- Installation
-- Usage
 - [Configuration](#_page4_x0.00_y842.00)
 - [Code Explanation](#_page4_x0.00_y842.00)
 
@@ -191,13 +156,6 @@ This is a Python implementation of a multiplayer snake game using the Tkinter li
 - Pause and resume functionality
 - Game over screen with play again and main menu options
 
-**Installation**
-
-**Steps**
-
-1\.Make sure you have Python installed on your machine. You can download it from python.org. 2.Clone this repository or download the zip file and extract it.
-
-3\.Navigate to the project directory.
 
 **Usage**
 
@@ -212,13 +170,9 @@ This is a Python implementation of a multiplayer snake game using the Tkinter li
 
 -Player 2 (WASD or ZQSD) Default control scheme is WASD.
 
-- Up: W <a name="_page4_x0.00_y842.00"></a>•
-
-  •
-
-Down: S
-
-- Left: A
+- Up: Z
+- Down: S
+- Left: Q
 - Right: D
 
 2\.Playing the Game:
@@ -255,35 +209,10 @@ You can customize the game speed and control scheme when starting the game by ca
 
 This project is a trivia mode for the "Drake The Snake" game, combining the classic Snake gameplay with trivia questions. The game is developed using Tkinter for the GUI and Pygame for sound effects.
 
-**Table of Contents**
-
-- Installation
-- Usage
-- Project Structure
-- [Code Explanation](#_page6_x0.00_y842.00)
-
-**Installation**
-
-**Steps**
-
-1. Clone the repository:
-
-   git clone https://github.com/yourusername/drake-the-snake-trivia-mode.git  cd drake-the-snake-trivia-mode
-
-2. Install required modules:
-
-pip install pygame
-
-3. Ensure the following files are in place:
-- questions.json : A JSON file containing the trivia questions and answers.
-- correct.mp3 : A sound file played when the correct answer is chosen
-- wrong.mp3 : A sound file played when an incorrect answer is chosen.
 
 **Usage**
 
-1\.Run the main menu script: `python trivia\_mode.py`
-
-2\.Playing the Game:
+Playing the Game:
 
 - Use the arrow keys to move the snake..
 - Answer trivia questions by moving the snake to the correct answer position.
@@ -293,8 +222,6 @@ pip install pygame
 
 - trivia\_mode.py: The main script to launch the trivia mode of the game.
 - questions.json: JSON file containing the trivia questions and answers. <a name="_page6_x0.00_y842.00"></a>•
-- correct.mp3: Sound file played when the correct answer is chosen.
-- wrong.mp3: Sound file played when an incorrect answer is chosen.
 
 **Code Explanation**
 
