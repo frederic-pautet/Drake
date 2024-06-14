@@ -4,8 +4,8 @@ This project is a graphical user interface (GUI) for the Snake Game Menu using T
 
 **Table of Contents**
 
-- [Installation](#_page0_x0.00_y842.00)
-- [Usage](#_page0_x0.00_y842.00)
+- [Installation](#_page0_x0.00_y42.00)
+- [Usage](#_page0_x0.00_y42.00)
 - [Project Structure](#_page0_x0.00_y842.00)
 - [Code Explanation](#_page0_x0.00_y842.00)
 
