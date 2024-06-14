@@ -1,5 +1,4 @@
 import json
-#import pygame
 from tkinter import *
 from random import randint, shuffle
 
@@ -7,20 +6,12 @@ import os
 
 
 def start_trivia_snake_game():
-    # Initialiser Pygame pour les sons
-    #pygame.init()
-    #correct_sound = pygame.mixer.Sound('correct.mp3')
-    #wrong_sound = pygame.mixer.Sound('wrong.mp3')
-
     # Get the path to the parallel folder
     current_dir = os.path.dirname(os.path.abspath(__file__))
     database_folder_path = os.path.join(current_dir, '..', 'database')  # Adjust the folder name accordingly
     questions_path = os.path.join(database_folder_path, 'questions.json')
     highscores_path = os.path.join(database_folder_path, 'highscores.json')
 
-    
-            
-            
     def process_name(name, game_mode, score, filename=highscores_path):
         print("writing database")
         data = read_database(filename)
@@ -75,8 +66,8 @@ def start_trivia_snake_game():
     # Créer un Canvas pour le score
     Barre = Text(fenetre, width=int(largeur / 2), height=int(HauteurPlateau / 10), bg="light blue")
     Barre.pack(side="top")
-    Barre.insert(END, "\n \n\n\n                                                 score: 0\n")
-
+    Barre.insert(END, "score: 0")
+    
     # Nombre de cases du plateau
     NombreDeCases = 75
     LargeurCase = (LargeurPlateau / NombreDeCases)
@@ -126,7 +117,7 @@ def start_trivia_snake_game():
         global MOUVEMENT
         if MOUVEMENT != (0, -1):  # Empêcher de revenir en arrière
             MOUVEMENT = (0, 1)
-
+    # Bind the movement's keys
     fenetre.bind("<Left>", left_key)
     fenetre.bind("<Right>", right_key)
     fenetre.bind("<Up>", up_key)
